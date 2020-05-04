@@ -18,10 +18,6 @@ void init_root_dir(){
     }
 }
 
-char* get_path(){
-    return path;
-}
-
 void show_dir(){
     int unit_amount = current_dir_table->unit_amount;
 
@@ -44,18 +40,6 @@ void show_dir(){
     }
 }
 
-int find_unit_in_table(dir_table* system_dir_table, char unit_name[]){
-    int dir_unit_amount = system_dir_table->unit_amount;
-    int unit_index = -1;
-
-    for(int i = 0; i < dir_unit_amount; i++){
-        if(strcmp(unit_name, system_dir_table->dirs[i].file_name) == 0){
-            unit_index = i;
-        }
-    }
-    return unit_index;
-
-}
 int change_dir(char dir_name[]){
     int unit_index = find_unit_in_table(current_dir_table, dir_name);
     if(unit_index == -1){
@@ -83,10 +67,27 @@ int change_dir(char dir_name[]){
     return 0;
 }
 
+int find_unit_in_table(dir_table* system_dir_table, char unit_name[]){
+    int dir_unit_amount = system_dir_table->unit_amount;
+    int unit_index = -1;
+
+    for(int i = 0; i < dir_unit_amount; i++){
+        if(strcmp(unit_name, system_dir_table->dirs[i].file_name) == 0){
+            unit_index = i;
+        }
+    }
+    return unit_index;
+
+}
+
+char* get_path(){
+    return path;
+}
+
 int change_name(char pre_name[], char new_name[]){
     int unit_index = find_unit_in_table(current_dir_table, pre_name);
     if(unit_index == -1){
-        printf("File cannot be found! Please check again.");
+        printf("File cannot be found! Please check again.\n");
         return -1;
     }
     strcpy(current_dir_table->dirs[unit_index].file_name, new_name);
@@ -116,6 +117,62 @@ int add_dir_unit(dir_table* system_dir_table, char file_name[], int type, int fc
     new_dir_unit->type = type;
     new_dir_unit->start_block = fcb_block_number;
 
+    return 0;
+}
+
+int delete_dir_unit(dir_table* system_dir_table, int unit_index){
+    int dir_unit_amount = system_dir_table->unit_amount;
+
+    for(int i = unit_index; i < dir_unit_amount - 1; i++){
+        system_dir_table->dirs[i] = system_dir_table->dirs[i+1];
+    }
+    system_dir_table->unit_amount--;
+    return 0;
+}
+
+int creat_dir(char dir_name[]){
+    if(strlen(dir_name) >= 99){
+        printf("Directory Name Too Long, Please Try Again!\n");
+        return -1;
+    }
+    int dir_block = get_block(1);
+    if(dir_block == -1){
+        return -1;
+    }
+
+    if(add_dir_unit(current_dir_table, dir_name, 0, dir_block) == -1){
+        return -1;
+    }
+
+    dir_table* new_table = (dir_table*)get_block_addr(dir_block);
+    new_table->unit_amount = 0;
+
+    char parent[] = "..";
+
+    if(add_dir_unit(new_table, parent, 0, get_addr_block((char*)current_dir_table)) == -1){
+        return -1;
+    }
+    return 0;
+}
+
+int delete_dir(char dir_name[]){
+    int unit_index = find_unit_in_table(current_dir_table, dir_name);
+
+    if(strcmp(dir_name, "..") == 0){
+        printf("Cannot Delete the Parent Directory at Current Position."
+               "Pleas Try Anoter File Again!\n");
+        return -1;
+    }
+    dir_unit current_unit = current_dir_table->dirs[unit_index];
+
+    if(current_unit.type == 0){
+        delete_file_in_table(current_dir_table, unit_index);
+    }else{
+        printf("It's Not A Directory, You Cannot Use This Instruction "
+               "To Delete This File\n");
+        return -1;
+    }
+    delete_dir_unit(current_dir_table, unit_index);
     return 0;
 }
 
@@ -152,7 +209,7 @@ int create_file(char file_name[], int file_size){
 }
 
 int delete_file(char file_name[]){
-    if(strcmp(file_name, "...") == 0){
+    if(strcmp(file_name, "..") == 0){
         printf("Sorry, You Cannot Delete Parent in Current Directory!");
         return -1;
     }
@@ -173,34 +230,24 @@ int delete_file(char file_name[]){
         return -1;
     }
 
+    int fcb_block = current_unit.start_block;
 
+    release_file(fcb_block);
 
-
+    delete_dir_unit(current_dir_table, unit_index);
     return 0;
 }
 
-int creat_dir(char dir_name[]){
-    if(strlen(dir_name) >= 99){
-        printf("Directory Name Too Long, Please Try Again!\n");
-        return -1;
-    }
-    int dir_block = get_block(1);
-    if(dir_block == -1){
-        cout<<"hello_world"<<endl;
-        return -1;
-    }
+int release_file(int fcb_block){
+    fcb* currrent_fcb = (fcb*)get_block_addr(fcb_block);
 
-    if(add_dir_unit(current_dir_table, dir_name, 0, dir_block) == -1){
-        return -1;
+    currrent_fcb->link--;
+
+    if(currrent_fcb->link == 0){
+        release_block(fcb_block, 1);
     }
-
-    dir_table* new_table = (dir_table*)get_block_addr(dir_block);
-    new_table->unit_amount = 0;
-
-    char parent[] = "...";
-
-    if(add_dir_unit(new_table, parent, 0, get_addr_block((char*)current_dir_table)) == -1){
-        return -1;
-    }
+    release_block(fcb_block, 1);
     return 0;
 }
+
+
