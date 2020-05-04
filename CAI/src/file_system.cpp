@@ -238,6 +238,29 @@ int delete_file(char file_name[]){
     return 0;
 }
 
+int delete_file_in_table(dir_table* system_dir_table, int unit_index){
+    dir_unit current_unit = system_dir_table->dirs[unit_index];
+
+    if(current_unit.type == 0){
+        int fcb_block = current_unit.start_block;
+        dir_table* table = (dir_table*) get_block_addr(fcb_block);
+
+        printf("You Have Deleted All the File in the Directory %s\n", current_unit.file_name);
+
+        int unit_count = table->unit_amount;
+
+        for(int i = 1; i < unit_count; i++){
+            printf(("Delete %s\n"), table->dirs[i].file_name);
+            delete_file_in_table(table, i);
+        }
+        release_block(fcb_block, 1);
+    }else{
+        int fcb_block = current_unit.start_block;
+        release_file(fcb_block);
+    }
+    return 0;
+}
+
 int release_file(int fcb_block){
     fcb* currrent_fcb = (fcb*)get_block_addr(fcb_block);
 
@@ -250,4 +273,6 @@ int release_file(int fcb_block){
 
     return 0;
 }
+
+
 
