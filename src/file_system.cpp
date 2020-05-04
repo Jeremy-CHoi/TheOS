@@ -247,7 +247,7 @@ int release_file(int fcb_block){
         release_block(fcb_block, 1);
     }
     release_block(fcb_block, 1);
+
     return 0;
 }
-
 
