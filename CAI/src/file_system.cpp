@@ -315,7 +315,11 @@ int write_exec(fcb* system_fcb, char content[]){
     char* data = (char*)get_block_addr(system_fcb->block_number);
 
     for(int i = 0; i < len && system_fcb->data_size < file_size; i ++, system_fcb->data_size++){
-
+        *(data + system_fcb->data_size) = content[i];
+    }
+    if(system_fcb->data_size == file_size){
+        printf("This File Has Reached Its File Size, You Can Try to Resize the "
+               "File or Create A New File to Store It!\n");
     }
     return 0;
 }
