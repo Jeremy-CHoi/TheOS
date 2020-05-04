@@ -41,7 +41,7 @@ void show_dir(){
 }
 
 int change_dir(char dir_name[]){
-    int unit_index = find_unit(current_dir_table, dir_name);
+    int unit_index = find_unit_in_table(current_dir_table, dir_name);
     if(unit_index == -1){
         printf("File cannot be found! Please check again.");
     }
@@ -274,5 +274,49 @@ int release_file(int fcb_block){
     return 0;
 }
 
+int write(char file_name[], char content[]){
+    int unit_index = find_unit_in_table(current_dir_table, file_name);
+    if(unit_index == -1){
+        printf("Cannot Find the File, Please Check the Entered File Name!\n");
+        return -1;
+    }
 
+    int fcb_block = current_dir_table->dirs[unit_index].start_block;
+    fcb* system_fcb = (fcb*)get_block_addr(fcb_block);
+    write_exec(system_fcb, content);
+
+    return 0;
+}
+
+int rewrite(char file_name[], char content[]){
+    int unit_index = find_unit_in_table(current_dir_table, file_name);
+
+    if(unit_index == -1){
+        printf("Cannot Find the File with Name You Entered in, Please Check And Try Again!\n");
+        return -1;
+    }
+
+    int fcb_block = current_dir_table->dirs[unit_index].start_block;
+
+    fcb* system_fcb = (fcb*)get_block_addr(fcb_block);
+
+    system_fcb->data_size = 0;
+    system_fcb->read_ptr = 0;
+
+    write_exec(system_fcb, content);
+
+    return 0;
+}
+
+int write_exec(fcb* system_fcb, char content[]){
+    int len = strlen(content);
+    int file_size = system_fcb->file_size * block_size;
+
+    char* data = (char*)get_block_addr(system_fcb->block_number);
+
+    for(int i = 0; i < len && system_fcb->data_size < file_size; i ++, system_fcb->data_size++){
+
+    }
+    return 0;
+}
 
