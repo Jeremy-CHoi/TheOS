@@ -41,7 +41,7 @@ void show_dir(){
 }
 
 int change_dir(char dir_name[]){
-    int unit_index = find_unit_in_table(current_dir_table, dir_name);
+    int unit_index = find_unit(current_dir_table, dir_name);
     if(unit_index == -1){
         printf("File cannot be found! Please check again.");
     }
