@@ -1,3 +1,4 @@
-# TheOS
-This is the repository for our CSC3002 Group Project.
-We can use this repository to store our code for the OS project. Please uload the files in personal folder before each meeting.
+# File System from Yujie CAI
+## Introduction
+I manage a method to achieve the file system using relatively little amount of code.<br>
+Here is the project files for Qt creator. Project not done yet, and it's for practice.<br>
