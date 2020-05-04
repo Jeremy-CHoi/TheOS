@@ -186,6 +186,7 @@ int creat_dir(char dir_name[]){
     }
     int dir_block = get_block(1);
     if(dir_block == -1){
+        cout<<"hello_world"<<endl;
         return -1;
     }
 
