@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/">
+        <file>back.png</file>
+        <file>back+.png</file>
+        <file>back2.png</file>
+        <file>back33.png</file>
+        <file>body.png</file>
+        <file>body2.png</file>
+        <file>down.png</file>
+        <file>down_snake.png</file>
+        <file>exit.png</file>
+        <file>Icon.png</file>
+        <file>left_snake.png</file>
+        <file>right.png</file>
+        <file>right-snake.png</file>
+        <file>start.png</file>
+        <file>up.png</file>
+        <file>up_snake.png</file>
+        <file>ys.png</file>
+        <file>ys2.png</file>
+        <file>left.png</file>
+    </qresource>
+</RCC>
