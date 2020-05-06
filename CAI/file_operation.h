@@ -1,8 +1,6 @@
 #ifndef FILE_OPERATION_H
 #define FILE_OPERATION_H
 
-//This file is referring to CSDN blog.csdn.net/little_qi/article/details/73801336
-
 #define dir_table_max_size 100
 struct dir_unit{
     char file_name[100];

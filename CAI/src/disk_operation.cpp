@@ -41,7 +41,7 @@ int get_block(int size){
             sum = 0;
         }
     }
-    std::cout<<"Cannot get series of memory or the memory is already full!"<<std::endl;
+    printf("Cannot get series of memory or the memory is already full!");
     return -1;
 }
 

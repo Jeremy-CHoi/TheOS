@@ -14,8 +14,8 @@ int main(){
     init_root_dir();
 
     char input_command[100];
-    char user_name[100] = "Supper User";
-    printf("TheOS\%s>",user_name);
+    char user_name[100] = "Super User";
+    printf("TheOS\\%s>",user_name);
 
     scanf("%s", input_command);
 

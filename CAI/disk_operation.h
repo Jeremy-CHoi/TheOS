@@ -1,10 +1,8 @@
 #ifndef DISK_OPERATION_H
 #define DISK_OPERATION_H
 
-#include "console.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <error.h>
 
 #define system_storage 100*1024*1024
 #define block_size 1024
