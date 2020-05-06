@@ -20,7 +20,7 @@ struct fcb{
     int file_size;
     int data_size;
     int read_ptr;
-    int line;
+    int link;
 };
 
 #endif // FILE_OPERATION_H
