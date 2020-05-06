@@ -240,7 +240,8 @@ HEADERS = ""
 SOURCES *= "" \
     src/FindAreaCode.cpp \
     src/InvertMap.cpp \
-    src/disk_operation.cpp
+    src/disk_operation.cpp \
+    src/main.cpp
 SOURCES = ""
 
 # include various source .cpp files and header .h files in the build process
