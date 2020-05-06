@@ -46,10 +46,10 @@ int main(){
             change_name(old_dir_name, new_dir_name);
         }else if(strcmp(input_command, "touch") == 0){
             char file_name[100];
-            int file_size = 1;
+            int file_size;
 
             scanf("%s", file_name);
-            scanf("%d", file_size);
+            scanf("%d", &file_size);
             create_file(file_name, file_size);
         }else if(strcmp(input_command, "rm") == 0){
             char file_name[100];

@@ -368,7 +368,7 @@ int read_exec(fcb* system_fcb, int length){
 
     char* data = (char*)get_block_addr(system_fcb->block_number);
 
-    for(int i = 0; i < length && system_fcb->read_ptr < data_size; i++, system_fcb->read_ptr++);{
+    for(int i = 0; i < length && system_fcb->read_ptr < data_size; i++, system_fcb->read_ptr++){
         printf("%c", *(data + system_fcb->read_ptr));
     }
 
