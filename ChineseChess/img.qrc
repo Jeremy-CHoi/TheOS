@@ -1,0 +1,27 @@
+<RCC>
+    <qresource prefix="/btn">
+        <file>img/bbborad.jpeg</file>
+        <file>img/total.png</file>
+        <file>img/restart.png</file>
+        <file>img/exit.png</file>
+        <file>img/start.png</file>
+    </qresource>
+    <qresource prefix="/chessman">
+        <file>img/xiang_red.png</file>
+        <file>img/xiang_black.png</file>
+        <file>img/to_move.png</file>
+        <file>img/shi_red.png</file>
+        <file>img/shuai_red.png</file>
+        <file>img/shi_black.png</file>
+        <file>img/selected.png</file>
+        <file>img/pao_red.png</file>
+        <file>img/pao_black.png</file>
+        <file>img/ma_red.png</file>
+        <file>img/ma_black.png</file>
+        <file>img/ju_red.png</file>
+        <file>img/ju_black.png</file>
+        <file>img/jiang_black.png</file>
+        <file>img/bin_red.png</file>
+        <file>img/bin_black.png</file>
+    </qresource>
+</RCC>
