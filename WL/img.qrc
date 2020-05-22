@@ -1,0 +1,40 @@
+<RCC>
+    <qresource prefix="/">
+        <file>background.png</file>
+        <file>rom.png</file>
+        <file>ram.png</file>
+        <file>App.png</file>
+        <file>rom_back.png</file>
+        <file>system.png</file>
+        <file>blue.png</file>
+        <file>management_back.png</file>
+        <file>Appstore.png</file>
+        <file>store_back.png</file>
+        <file>calendar.png</file>
+        <file>Snake.png</file>
+        <file>User_logo.png</file>
+        <file>Game.png</file>
+        <file>Life.png</file>
+        <file>Game2.png</file>
+        <file>Life2.png</file>
+        <file>search_btn.png</file>
+        <file>1.png</file>
+        <file>chess.jpeg</file>
+        <file>dead.jpg</file>
+        <file>fishjoy.jpg</file>
+        <file>App_calendar.png</file>
+        <file>App_chess.png</file>
+        <file>App_fish.png</file>
+        <file>App_map.png</file>
+        <file>App_snake.png</file>
+        <file>ok.png</file>
+        <file>download.png</file>
+        <file>map.png</file>
+        <file>map_back.png</file>
+        <file>calendar_back.png</file>
+        <file>snake_back.png</file>
+        <file>chess.png</file>
+        <file>fishjoy.png</file>
+        <file>uninstall.png</file>
+    </qresource>
+</RCC>
